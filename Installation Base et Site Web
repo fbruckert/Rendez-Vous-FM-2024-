@@ -1,0 +1,12 @@
+INSTALLATION
+
+- Héberger RendezVousFM_FB_demo.fmp12 sur FileMaker Serveur
+
+- Récupérer l'adresse IP de FileMaker Serveur (visible sur le page d'Accueil de l'Admin Console)
+
+- Renseigner l'Adresse IP du Serveur sur la Page dbconnect.php (dossiers php du Site_api et du Site_php du Site Web Rendez_vousFM)
+
+- Mettre le dossier Site Web Rendez_vousFM dans le dossier du Serveur Web Local de l'Ordinateur. Le chemin du serveur pourra être choisi dans l'application MAMP par exemple.
+
+
+ NOTE IMPORTANTE ++++++ : pour le fonctionnement du site en API, le serveur Web doit être le même serveur que celui de FileMaker Serveur, avec activation d'un Certificat SSL valide.
