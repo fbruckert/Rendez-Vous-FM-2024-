@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+//    DEFINITION DE L'URL DE FILEMAKER SERVEUR ET DE LA DEMANDE DE CONNEXION
+var url = "https://scmradiologie.fmcloud.fm";
+var request = "/fmi/data/vLatest/databases/RendezVousFM_FB_demo/layouts/php_datas_get/script/php_periode_dates_facture" ;
+var param = '?script.param=' + 'parametre_non_necessaire';
+
+var url_requested = url + request + param ;
+
+var token = sessionStorage.getItem("token");
+
+// ENTETE
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Authorization", "Bearer " + token );
+
+var requestOptions = {
+  method: "GET",
+  headers: myHeaders,
+  redirect: "follow"
+};
+
+fetch( url_requested , requestOptions)
+  .then((response) => response.text())
+  .then((result) => {
+    console.log(result);
+    json_result_get();
+
+  })
+  .catch((error) => console.error(error));
+
+
+function json_result_get(){
+var request = "/fmi/data/vLatest/databases/RendezVousFM_FB_demo/layouts/php_datas_get/records/1";
+var url_requested = url + request ;
+
+fetch( url_requested , requestOptions)
+  .then((response) => response.json())
+  .then((result) => {
+    console.log(result);
+    var json_result = result.response.data[0].fieldData.JSON_RESULT;
+
+    var display = document.getElementById("resultDiv");
+    display.innerHTML = json_result ;
+    })
+
+  .catch((error) => console.error(error));
+}
+
+</script>
+
+</head>
+<body>
+<h1>periode_dates_facture</h1></br></br>
+
+<div id="resultDiv">
+</div>
+
+</body>
+</html>

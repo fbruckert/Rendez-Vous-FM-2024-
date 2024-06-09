@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+//    DEFINITION DE L'URL DE FILEMAKER SERVEUR ET DE LA DEMANDE DE CONNEXION
+var url = "https://scmradiologie.fmcloud.fm";
+var request = "/fmi/data/vLatest/databases/RendezVousFM_FB_demo/sessions" ;
+
+var url_requested = url + request ;
+
+// ENTETE
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Authorization", "Basic d2ViOndlYg==" );
+
+//var raw = "";
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  //body: raw,
+  redirect: 'follow'
+};
+
+fetch( url_requested , requestOptions)
+  .then(response => response.json())
+  .then(result => {
+      console.log(result);
+      var display = document.getElementById("resultDiv");
+      display.innerHTML = 'test ok avec Token Rendez Vous FM: ' + result.response.token;
+
+      //STOCKAGE DU TOKEN EN VARIABLE DE SESSION
+      sessionStorage.setItem("token", result.response.token);
+
+  })
+  .catch(error => console.log('error', error));
+
+
+</script>
+
+</head>
+<body>
+<h1>Test de l'API en fetch sur RendezVous FM.fmp12 en API</h1></br></br>
+
+<div id="resultDiv">
+</div> </br></br>
+
+<a href="layouts.html" class="">Liste des Layouts Rendez Vous FM</a></br>
+<a href="periode_dates_facture.html" class="">Periode Factures Rendez Vous FM</a>
+
+
+
+</body>
+</html>

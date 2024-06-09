@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+//    DEFINITION DE L'URL DE FILEMAKER SERVEUR ET DE LA DEMANDE DE CONNEXION
+var url = "https://scmradiologie.fmcloud.fm";
+var request = "/fmi/data/vLatest/databases/RendezVousFM_FB_demo/layouts" ;
+
+var url_requested = url + request ;
+
+var token = sessionStorage.getItem("token");
+
+// ENTETE
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Authorization", "Bearer " + token );
+
+//var raw = "";
+
+var requestOptions = {
+  method: "GET",
+  headers: myHeaders,
+  redirect: "follow"
+};
+
+fetch( url_requested , requestOptions)
+  .then((response) => response.json())
+  .then((result) => {
+    console.log(result);
+    var list = '';
+    var layoutList = result.response.layouts;
+    for (var i = 0; i < layoutList.length; i++ ) {
+      list += '<li>' + layoutList[i].name +'</li>';
+      }
+      var display = document.getElementById("resultDiv");
+      display.innerHTML = list ;
+    })
+
+  .catch((error) => console.error(error));
+
+
+</script>
+
+</head>
+<body>
+<h1>Liste des Layouts de RendezVousFM</h1></br></br>
+
+<div id="resultDiv">
+</div>
+
+</body>
+</html>

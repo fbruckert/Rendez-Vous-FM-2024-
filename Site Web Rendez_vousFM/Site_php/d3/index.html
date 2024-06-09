@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Zoomable sunburst</title>
+<link rel="stylesheet" type="text/css" href="./inspector.css">
+<head>
+    <script src = "https://d3js.org/d3.v4.min.js"></script>
+ </head>
+<body>
+
+  <!-- <script src="runtime.js"></script> -->
+  <script src="data.js"></script>
+  <script src="d3_function.js"></script>
+
+<div id="svg_display">
+
+</div>
+
+<!-- SCRIPTS LANCES AU CHARGEMENT DE LA PAGE-->
+<script type="text/javascript">
+  document.onload = _chart(d3,data);
+</script>
+
+</body>
